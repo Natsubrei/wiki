@@ -1,8 +1,6 @@
 # Wiki
 
-个人站点：Markdown 写博客，HTML 做浏览器里的小工具。
-
-文章和工具放在本仓库外面的目录里。改文件后刷新页面即可；只有改网站程序或样式才需要重新构建。
+个人 wiki：Markdown 博客和浏览器小工具。
 
 ## 使用
 
@@ -59,3 +57,7 @@ description: 一句话
 ## 站点
 
 站名在 `src/site.ts`。`SITE_URL` 写进 RSS 和规范链接。改网站本身时才需要 `--build`。
+
+## License
+
+MIT
