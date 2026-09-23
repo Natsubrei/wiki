@@ -1,0 +1,18 @@
+---
+import { getPost } from '../../lib/posts';
+import Post from '../../layouts/Post.astro';
+
+const slug = Astro.params.slug;
+if (!slug) {
+  return Astro.rewrite('/404');
+}
+
+const post = await getPost(slug);
+if (!post) {
+  return Astro.rewrite('/404');
+}
+---
+
+<Post title={post.title} date={post.date}>
+  <Fragment set:html={post.html} />
+</Post>

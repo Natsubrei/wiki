@@ -1,0 +1,39 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  wide?: boolean;
+}
+
+const { title, description = site.description, wide = false } = Astro.props;
+const fullTitle = title ? `${title} · ${site.name}` : site.name;
+---
+
+<!doctype html>
+<html lang={site.lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="alternate" type="application/rss+xml" title={site.name} href="/rss.xml" />
+    <link rel="preconnect" href="https://fonts.font.im" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.font.im/css?family=Kalam|Merienda+One|Fira+Mono|Noto+Sans+SC:400,700"
+    />
+  </head>
+  <body>
+    <Header />
+    <main class:list={['page', 'wiki', wide && 'wide']}>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,44 @@
+---
+import Base from './Base.astro';
+
+interface Props {
+  title: string;
+  date: Date;
+}
+
+const { title, date } = Astro.props;
+const published = date.toISOString().slice(0, 10);
+---
+
+<Base title={title} description={title}>
+  <h1>{title}</h1>
+  <div class="meta">
+    <time datetime={published}>{published}</time>
+  </div>
+  <slot />
+</Base>
+
+<script>
+  document.querySelectorAll('.wiki pre').forEach((pre) => {
+    if (pre.parentElement?.classList.contains('code')) return;
+    const wrap = document.createElement('div');
+    wrap.className = 'code';
+    pre.replaceWith(wrap);
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'copy-code';
+    btn.textContent = '复制';
+    wrap.append(btn, pre);
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(pre.textContent ?? '');
+        btn.textContent = '已复制';
+      } catch {
+        btn.textContent = '失败';
+      }
+      setTimeout(() => {
+        btn.textContent = '复制';
+      }, 900);
+    });
+  });
+</script>

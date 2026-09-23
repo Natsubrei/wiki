@@ -1,0 +1,24 @@
+---
+import { site } from '../site';
+
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+
+function current(href: string) {
+  if (href === '/') return path === '/';
+  return path === href || path.startsWith(`${href}/`);
+}
+---
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="/">{site.name}</a>
+    <form class="seek" action="/blog" method="get" role="search">
+      <label for="q">for</label>
+      <input id="q" name="q" type="search" maxlength="48" autocomplete="off" />
+    </form>
+    <nav class="nav" aria-label="栏目">
+      <a href="/blog" aria-current={current('/blog') ? 'page' : undefined}>博客</a>
+      <a href="/tools" aria-current={current('/tools') ? 'page' : undefined}>工具</a>
+    </nav>
+  </div>
+</header>

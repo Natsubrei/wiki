@@ -1,0 +1,60 @@
+---
+import { listPosts } from '../../lib/posts';
+import Base from '../../layouts/Base.astro';
+
+const posts = await listPosts();
+
+function haystack(post: (typeof posts)[number]) {
+  const body = post.body
+    .replace(/```[\s\S]*?```/g, ' ')
+    .replace(/[#*_`>[\]()|!-]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 240);
+  return `${post.title} ${body}`.toLowerCase();
+}
+---
+
+<Base title="博客" description="按时间排列的笔记，可按标题和正文查找。">
+  <h1>博客</h1>
+
+  <ul class="post-list" id="post-list">
+    {
+      posts.map((post) => {
+        const day = post.date.toISOString().slice(0, 10);
+        return (
+          <li data-haystack={haystack(post)}>
+            <time datetime={day}>{day}</time>
+            <a href={`/blog/${post.slug}`}>{post.title}</a>
+          </li>
+        );
+      })
+    }
+  </ul>
+  <p id="no-hit" hidden>没有匹配的博客。</p>
+</Base>
+
+<script>
+  const list = document.querySelector('#post-list');
+  const empty = document.querySelector('#no-hit');
+  const headerInput = document.querySelector<HTMLInputElement>('.seek input');
+  const items = list ? [...list.querySelectorAll('li')] : [];
+
+  function apply(value: string) {
+    const terms = value.trim().toLowerCase().split(/\s+/).filter(Boolean);
+    let n = 0;
+    for (const li of items) {
+      const hay = li.getAttribute('data-haystack') ?? '';
+      const ok = terms.every((term) => hay.includes(term));
+      li.hidden = !ok;
+      if (ok) n += 1;
+    }
+    if (empty) empty.hidden = n > 0;
+  }
+
+  const initial = new URLSearchParams(location.search).get('q') ?? '';
+  if (headerInput) headerInput.value = initial;
+  apply(initial);
+
+  headerInput?.addEventListener('input', () => apply(headerInput.value));
+</script>

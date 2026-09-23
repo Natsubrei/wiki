@@ -1,0 +1,24 @@
+---
+import { getTool } from '../../lib/tools';
+import Base from '../../layouts/Base.astro';
+
+const slug = Astro.params.slug;
+if (!slug) {
+  return Astro.rewrite('/404');
+}
+
+const tool = await getTool(slug);
+if (!tool) {
+  return Astro.rewrite('/404');
+}
+---
+
+<Base title={tool.title} description={tool.description} wide={tool.wide}>
+  <h1>{tool.title}</h1>
+  <Fragment set:html={tool.html} />
+  {
+    tool.scripts.map((code) => (
+      <script is:inline set:html={code} />
+    ))
+  }
+</Base>

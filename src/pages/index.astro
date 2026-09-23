@@ -1,0 +1,42 @@
+---
+import { listPosts } from '../lib/posts';
+import { listTools } from '../lib/tools';
+import Base from '../layouts/Base.astro';
+import { site } from '../site';
+
+const posts = await listPosts();
+const tools = await listTools();
+const recent = posts.slice(0, 8);
+---
+
+<Base>
+  <h1 class="display">{site.name}</h1>
+
+  <h2>最近</h2>
+  <ul class="post-list">
+    {
+      recent.map((post) => {
+        const day = post.date.toISOString().slice(0, 10);
+        return (
+          <li>
+            <time datetime={day}>{day}</time>
+            <a href={`/blog/${post.slug}`}>{post.title}</a>
+          </li>
+        );
+      })
+    }
+  </ul>
+  <p class="more"><a href="/blog">more</a></p>
+
+  <h2>工具</h2>
+  <ul>
+    {
+      tools.map((tool) => (
+        <li>
+          <a href={`/tools/${tool.slug}`}>{tool.title}</a>
+          {tool.description ? ` — ${tool.description}` : ''}
+        </li>
+      ))
+    }
+  </ul>
+</Base>

@@ -1,0 +1,19 @@
+services:
+  web:
+    build:
+      context: .
+      args:
+        SITE_URL: ${SITE_URL:-http://localhost}
+    image: wiki
+    ports:
+      - "${PORT:-80}:80"
+    environment:
+      HOST: 0.0.0.0
+      PORT: 80
+      SITE_URL: ${SITE_URL:-http://localhost}
+      POSTS_DIR: /app/posts
+      TOOLS_DIR: /app/tools
+    volumes:
+      - ../wiki-content/posts:/app/posts
+      - ../wiki-content/tools:/app/tools
+    restart: unless-stopped

@@ -1,0 +1,20 @@
+---
+import { listTools } from '../../lib/tools';
+import Base from '../../layouts/Base.astro';
+
+const tools = await listTools();
+---
+
+<Base title="工具" description="都在浏览器里计算，不经过服务器。">
+  <h1>工具</h1>
+  <ul>
+    {
+      tools.map((tool) => (
+        <li>
+          <a href={`/tools/${tool.slug}`}>{tool.title}</a>
+          {tool.description ? ` — ${tool.description}` : ''}
+        </li>
+      ))
+    }
+  </ul>
+</Base>
