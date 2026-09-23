@@ -7,6 +7,7 @@
   --sky: #0ea5e9;
   --display: "Merienda One", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
   --sans: Kalam, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --ui: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
   --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 }
 
@@ -407,7 +408,7 @@ a {
 
 .tool {
   margin-top: 1.25rem;
-  font-family: var(--sans);
+  font-family: var(--ui);
 }
 
 .tool label {
@@ -460,7 +461,7 @@ a {
   border-radius: 999px;
   background: #e2e8f0;
   color: var(--text);
-  font: 0.85rem/1.4 var(--sans);
+  font: 0.85rem/1.4 var(--ui);
   padding: 0.3rem 0.95rem;
   cursor: pointer;
 }
