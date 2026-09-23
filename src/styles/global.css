@@ -6,7 +6,7 @@
   --link: #3730a3;
   --sky: #0ea5e9;
   --display: "Merienda One", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
-  --sans: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --sans: Kalam, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
   --mono: "Fira Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 }
 
@@ -92,6 +92,7 @@ a {
   margin-left: 1rem;
   padding-left: var(--nav-gap);
   border-left: 1px solid var(--line);
+  font-family: var(--display);
   font-size: 0.875rem;
   font-weight: 600;
   line-height: 1.5;
@@ -130,11 +131,11 @@ a {
 .wiki h2,
 .wiki h3,
 .wiki h4 {
-  font-family: var(--sans);
+  font-family: var(--display);
   font-weight: 700;
   color: inherit;
   margin: 0;
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
   text-wrap: pretty;
 }
 
