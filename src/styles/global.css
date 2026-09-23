@@ -7,7 +7,7 @@
   --sky: #0ea5e9;
   --display: "Merienda One", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
   --sans: Kalam, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
-  --mono: "Fira Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 }
 
 * { box-sizing: border-box; }
@@ -248,8 +248,9 @@ a {
 
 .wiki :not(pre) > code {
   font-family: var(--mono);
-  font-size: 0.85em;
-  font-weight: 200;
+  font-size: 0.875em;
+  font-weight: 400;
+  font-style: normal;
   color: inherit;
   background: transparent;
   padding: 0 0.125rem;
@@ -272,7 +273,7 @@ a {
   border-radius: 0.4rem;
   background: rgba(255, 255, 255, 0.75);
   color: #64748b;
-  font: 0.75rem/1 var(--sans);
+  font: 0.75rem/1 "Noto Sans SC", sans-serif;
   padding: 0.28rem 0.5rem;
   min-width: 3.6rem;
   cursor: pointer;
@@ -280,6 +281,11 @@ a {
 .wiki .copy-code:hover {
   color: #0f172a;
   background: #fff;
+}
+@media (hover: hover) {
+  .wiki .copy-code { opacity: 0; }
+  .wiki .code:hover .copy-code,
+  .wiki .copy-code:focus { opacity: 1; }
 }
 
 .wiki pre {
@@ -292,16 +298,19 @@ a {
     0 1px 3px 0 rgba(0, 0, 0, 0.1),
     0 1px 2px -1px rgba(0, 0, 0, 0.1);
   font-family: var(--mono);
-  line-height: 1.5;
+  font-variant-ligatures: none;
+  tab-size: 4;
   color: inherit;
 }
 
 .wiki pre code {
   display: block;
-  padding: 0.5rem;
+  padding: 0.9rem 1.15rem;
+  padding-right: 4.4rem;
   font-family: var(--mono);
-  font-size: 0.9rem;
-  line-height: 1.2;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  font-weight: 400;
   background: none;
 }
 
