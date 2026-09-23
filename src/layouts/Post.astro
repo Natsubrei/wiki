@@ -27,17 +27,17 @@ const published = date.toISOString().slice(0, 10);
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'copy-code';
-    btn.textContent = '复制';
+    btn.textContent = 'Copy';
     wrap.append(btn, pre);
     btn.addEventListener('click', async () => {
       try {
         await navigator.clipboard.writeText(pre.textContent ?? '');
-        btn.textContent = '已复制';
+        btn.textContent = 'Copied';
       } catch {
-        btn.textContent = '失败';
+        btn.textContent = 'Failed';
       }
       setTimeout(() => {
-        btn.textContent = '复制';
+        btn.textContent = 'Copy';
       }, 900);
     });
   });

@@ -15,8 +15,8 @@ function haystack(post: (typeof posts)[number]) {
 }
 ---
 
-<Base title="博客" description="按时间排列的笔记，可按标题和正文查找。">
-  <h1>博客</h1>
+<Base title="Blog" description="Notes in chronological order. Search matches titles and body text.">
+  <h1>Blog</h1>
 
   <ul class="post-list" id="post-list">
     {
@@ -31,7 +31,7 @@ function haystack(post: (typeof posts)[number]) {
       })
     }
   </ul>
-  <p id="no-hit" hidden>没有匹配的博客。</p>
+  <p id="no-hit" hidden>No matching posts.</p>
 </Base>
 
 <script>
