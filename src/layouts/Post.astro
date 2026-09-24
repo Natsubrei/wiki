@@ -30,11 +30,32 @@ const published = date.toISOString().slice(0, 10);
     btn.textContent = 'Copy';
     wrap.append(btn, pre);
     btn.addEventListener('click', async () => {
+      const text = pre.textContent ?? '';
+      const viaExec = () => {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.cssText = 'position:fixed;left:-9999px;top:0';
+        document.body.append(ta);
+        ta.select();
+        const ok = document.execCommand('copy');
+        ta.remove();
+        if (!ok) throw new Error('copy');
+      };
       try {
-        await navigator.clipboard.writeText(pre.textContent ?? '');
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+        } else {
+          viaExec();
+        }
         btn.textContent = 'Copied';
       } catch {
-        btn.textContent = 'Failed';
+        try {
+          viaExec();
+          btn.textContent = 'Copied';
+        } catch {
+          btn.textContent = 'Failed';
+        }
       }
       setTimeout(() => {
         btn.textContent = 'Copy';
