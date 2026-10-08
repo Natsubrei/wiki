@@ -11,11 +11,11 @@ FROM node:24-alpine
 WORKDIR /app
 ENV HOST=0.0.0.0
 ENV PORT=80
-ENV POSTS_DIR=/app/posts
-ENV TOOLS_DIR=/app/tools
+ENV POSTS_DIR=/app/content/posts
+ENV TOOLS_DIR=/app/content/tools
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/package.json ./
-RUN mkdir -p /app/posts /app/tools
+RUN mkdir -p /app/content/posts /app/content/tools
 EXPOSE 80
 CMD ["node", "./dist/server/entry.mjs"]

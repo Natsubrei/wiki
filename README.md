@@ -18,8 +18,7 @@ docker compose up -d --build
 
 ```yaml
 volumes:
-  - ../wiki-content/posts:/app/posts
-  - ../wiki-content/tools:/app/tools
+  - ../wiki-content:/app/content
 ```
 
 | | 环境变量 | 默认 | 地址 |
